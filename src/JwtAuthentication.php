@@ -157,7 +157,6 @@ final class JwtAuthentication implements MiddlewareInterface
         }
 
         /* Modify $request before calling next middleware. */
-        // Add $response
         if (is_callable($this->options["before"])) {
             $response = (new ResponseFactory)->createResponse(200);
             $beforeRequest = $this->options["before"]($request, $response, $params);
