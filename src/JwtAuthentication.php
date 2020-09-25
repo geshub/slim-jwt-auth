@@ -162,6 +162,9 @@ final class JwtAuthentication implements MiddlewareInterface
             $beforeRequest = $this->options["before"]($request, $response, $params);
             if ($beforeRequest instanceof ServerRequestInterface) {
                 $request = $beforeRequest;
+            } elseif ($beforeRequest instanceof ResponseInterface && $beforeRequest->getStatusCode() == 401)) {
+                // Allow exiting on auth error
+                return $beforeRequest;
             }
         }
 
